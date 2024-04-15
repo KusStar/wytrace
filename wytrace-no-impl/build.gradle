@@ -14,16 +14,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        externalNativeBuild {
-            cmake {
-                cppFlags "-fvisibility=hidden"
-                arguments "-DANDROID_ARM_MODE=arm", "-DANDROID_STL=c++_static"
-            }
-        }
-
-        ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a'
-        }
     }
 
     buildTypes {
@@ -35,18 +25,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
-        }
-    }
-    packagingOptions {
-        exclude '**/libshadowhook.so'
-    }
-    buildFeatures {
-        prefab true
     }
 
     publishing {
@@ -70,7 +48,7 @@ afterEvaluate {
                 artifactId = "wytrace"
                 from components.findByName('release')
                 pom {
-                    name.set("wytrace")
+                    name.set("wytrace-no-impl")
                     description.set("A Tool for APK arsc editor")
                     url.set("https://github.com/shiqos/ArscBlamer")
                     licenses {
