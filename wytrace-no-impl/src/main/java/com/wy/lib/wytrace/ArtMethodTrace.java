@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
 
-import com.bytedance.shadowhook.ShadowHook;
-
 /**
  * Description:
  *

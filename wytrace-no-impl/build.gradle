@@ -1,7 +1,5 @@
 plugins {
     id 'com.android.library'
-    id 'maven-publish'
-    id 'signing'
 }
 
 android {
@@ -34,63 +32,5 @@ android {
     }
 }
 
-group = "io.github.shiqos"
-version = "1.1.0"
-
 dependencies {
-    api 'com.bytedance.android:shadowhook:1.0.9'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                artifactId = "wytrace"
-                from components.findByName('release')
-                pom {
-                    name.set("wytrace-no-impl")
-                    description.set("A Tool for APK arsc editor")
-                    url.set("https://github.com/shiqos/ArscBlamer")
-                    licenses {
-                        license {
-                            name.set("The Apache License, Version 2.0")
-                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                        }
-                    }
-                    developers {
-                        developer {
-                            id.set("shiqos")
-                            name.set("shiqos")
-                            email.set("shiqcode@gmail.com")
-                        }
-                    }
-                    scm {
-                        connection.set("scm:git:git://github.com:shiqos/wytrace.git")
-                        developerConnection.set("scm:git:ssh://github.com:shiqos/wytrace.git")
-                        url.set("https://github.com/shiqos/wytrace")
-                    }
-                }
-            }
-        }
-        repositories {
-            maven {
-                var snapshotUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/snapshots/")
-                var releaseUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-                if (version.toString().endsWith("-SNAPSHOT")) {
-                    url = snapshotUrl
-                } else {
-                    url = releaseUrl
-                }
-                println("publishing to ${ossrhUsername}")
-                credentials {
-                    username = ossrhUsername
-                    password = ossrhPassword
-                }
-            }
-        }
-    }
-
-    signing {
-        sign(publishing.publications["mavenJava"])
-    }
 }

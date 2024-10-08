@@ -7,3 +7,24 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+allprojects {
+	version = "1.0.0"
+	group = 'io.kusstar.fork-wytrace'
+}
+
+subprojects {
+	apply plugin: 'maven-publish'
+	
+	publishing {
+		publications {
+			maven(MavenPublication) {
+				groupId project.group
+				artifactId project.name
+				version project.version
+                // artifact aar
+                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+			}
+		}
+	}
+}
